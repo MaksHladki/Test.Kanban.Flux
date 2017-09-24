@@ -1,0 +1,114 @@
+body {
+    font-family: sans-serif;
+    background-color: #E5E5E5;
+}
+
+/* LANE */
+.lane {
+    display: inline-block;
+    margin: 0.5em;
+    background-color: #FCFCFC;
+    width: 15em;
+    vertical-align: top;
+}
+
+.lane__header {
+    position: relative;
+    padding: 10px;
+    color: #333333;
+}
+
+.lane-header__name {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.lane__body {
+    overflow-y: auto;
+    overflow-x: none;
+    padding: 0px 5px;
+}
+
+.lane__footer {
+    background-color: #F5F5F5;
+    border-top: 1px solid #DDDDDD;
+    padding: 5px;
+}
+
+.lane__footer:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.lane-button__btn-delete {
+    float: right;
+    margin-right: 5px;
+}
+
+.lane-button__btn-add {
+    position: absolute;
+    right: 10px;
+}
+
+
+/* NOTE */
+.note-list {
+    padding-left: 0;
+    list-style: none;
+    padding: 0 5px;
+}
+
+.note {
+    margin: 5px 0px;
+    border: 1px solid #D0D0D0;
+    background: #FFFFFF;
+    padding: 5px;
+    position: relative;
+    color: #333333;
+}
+
+.note:hover {
+    box-shadow: 0 0 0.3em 0.03em rgba(0, 0, 0, 0.5);
+    transition: 0.5s;
+}
+
+.note__text {
+    width: 100%;
+    outline: none;
+    border: none;
+}
+
+.note__text:hover{
+    outline: none;
+    border: none;
+}
+
+.note__edit {
+    width: 100%;
+}
+
+.note .value {
+    display: inline-block;
+}
+
+.note .delete {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    right: 5px;
+    cursor: pointer;
+    visibility: hidden;
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 100;
+}
+
+.note:hover .delete {
+    visibility: visible;
+}
+
+.button {
+    color: #D5D5D5;
+}
