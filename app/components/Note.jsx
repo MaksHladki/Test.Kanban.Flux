@@ -1,6 +1,7 @@
 import React from 'react';
-import Autobind from 'autobind-decorator';
 import {DragSource, DropTarget} from 'react-dnd';
+import Autobind from 'autobind-decorator';
+
 import ItemType from '../constants/itemType';
 
 const noteSource = {
@@ -34,12 +35,14 @@ const noteTarget = {
 @Autobind
 class Note extends React.Component {
     render() {
-        const { connectDragSource, connectDropTarget, isDragging, isOver,
-            id, onMove, editing, ...props } = this.props;
+        const { connectDragSource, connectDropTarget, isDragging, isOver, editing, ...props } = this.props;
         const dragSource = editing ? a => a : connectDragSource;
+        const style = {
+            opacity: isDragging || isOver ? 0 : 1
+        };
 
         return dragSource(connectDropTarget(
-            <li style={{ opacity: isDragging || isOver ? 0 : 1}} {...props}>{props.children}</li>
+            <li style={style} {...props}>{props.children}</li>
         ));
     }
 }

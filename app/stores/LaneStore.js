@@ -1,6 +1,7 @@
 import uuid from 'node-uuid';
 import update from 'react-addons-update';
 import alt from '../lib/alt';
+
 import NoteStore from './NoteStore';
 import LaneActions from '../actions/LaneActions';
 
@@ -70,7 +71,21 @@ class LaneStore{
         this.setState({lanes});
     }
 
-    move({ sourceId, targetId }) {
+    moveLane([sourceId, targetId]){
+        const lanes = this.lanes;
+        const dragLane = lanes[sourceId];
+
+        const reOrderedLanes = update(lanes, {
+              $splice: [
+                [sourceId, 1],
+                [targetId, 0, dragLane],
+              ],
+          });
+    
+        this.setState({lanes: reOrderedLanes});
+    }
+
+    moveNote({ sourceId, targetId }) {
         const lanes = this.lanes;
         const sourceLane = lanes.filter(lane => lane.notes.includes(sourceId))[0];
         const targetLane = lanes.filter(lane => lane.notes.includes(targetId))[0];
@@ -88,7 +103,6 @@ class LaneStore{
         }
         else{
             sourceLane.notes.splice(sourceNoteIndex, 1);
-            // and move it to target
             targetLane.notes.splice(targetNoteIndex, 0, sourceId);
         }
 

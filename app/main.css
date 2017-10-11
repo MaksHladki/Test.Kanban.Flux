@@ -1,49 +1,70 @@
-body {
+.page-container {
     font-family: sans-serif;
     background-color: #E5E5E5;
 }
 
 /* LANE */
+.lane-list {
+    white-space: nowrap;
+}
+
 .lane {
+    width: 18rem;
     display: inline-block;
-    margin: 0.5em;
-    background-color: #FCFCFC;
-    width: 15em;
+    margin: 0.5rem;
     vertical-align: top;
+    background-color: #FCFCFC;
+}
+
+.lane + .lane {
+    margin-left: 0;
 }
 
 .lane__header {
     position: relative;
-    padding: 10px;
-    color: #333333;
+    padding: 0.5rem;
+    color: #424242;
 }
 
 .lane-header__name {
-    text-transform: uppercase;
+    padding-right: 1.2rem;
     font-weight: bold;
+    text-transform: uppercase;
+}
+
+.lane-header__name__text{
+    display:inline-block;
+    max-width: 100%;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+}
+
+.lane-header__name--edit{
+   width: 100%;
 }
 
 .lane__body {
     overflow-y: auto;
     overflow-x: none;
-    padding: 0px 5px;
+    padding: 0.5rem;
+    padding-right: 0.3rem;
 }
 
 .lane__footer {
     background-color: #F5F5F5;
     border-top: 1px solid #DDDDDD;
-    padding: 5px;
+    padding: 0.5rem;
 }
 
 .lane__footer:after {
-    content: '';
-    display: block;
     clear: both;
+    display: block;
+    content: '';
 }
 
 .lane-button__btn-delete {
     float: right;
-    margin-right: 5px;
 }
 
 .lane-button__btn-add {
@@ -51,45 +72,60 @@ body {
     right: 10px;
 }
 
+@media screen and (max-width: 320px) {
+    .lane {
+        display: block;
+        margin: 10px auto;
+        width: 100%;
+    }
+}
+
 
 /* NOTE */
+
 .note-list {
-    padding-left: 0;
+    margin: 0;
+    padding: 0;
+    padding-right: 0.6rem;
     list-style: none;
-    padding: 0 5px;
 }
 
 .note {
-    margin: 5px 0px;
+    margin: 0.25rem 0px;
     border: 1px solid #D0D0D0;
     background: #FFFFFF;
-    padding: 5px;
+    padding: 0.5rem;
     position: relative;
     color: #333333;
 }
 
+.none:first-child{
+    margin-top: 0;
+}
+
+.none:last-child{
+    margin-bottom: 0;
+}
+
 .note:hover {
-    box-shadow: 0 0 0.3em 0.03em rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0.3rem 0.03rem rgba(0, 0, 0, 0.4);
     transition: 0.5s;
 }
 
+.note--edit {
+    width: 100%;
+    outline: none;
+    border: none;
+}
+
+.note--edit:hover {
+    outline: none;
+    border: none;
+}
+
 .note__text {
-    width: 100%;
-    outline: none;
-    border: none;
-}
-
-.note__text:hover{
-    outline: none;
-    border: none;
-}
-
-.note__edit {
-    width: 100%;
-}
-
-.note .value {
     display: inline-block;
+    white-space: normal;
 }
 
 .note .delete {
@@ -111,4 +147,41 @@ body {
 
 .button {
     color: #D5D5D5;
+}
+
+
+/* MENU */
+.menu {
+    background: #0B2027;
+}
+
+.menu__row {
+    margin: 0 2.5rem;
+}
+
+.menu__list {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    vertical-align: bottom;
+    font-size: 1.0rem;
+}
+
+.menu__col {
+    float: left;
+}
+
+.menu__link {
+    display: block;
+    padding: 0.8rem 1.0rem;
+    color: white;
+    font-weight: 500;
+    text-decoration: none;
+    transition: .3s;
+}
+
+.menu__link:hover {
+    background: #16414f;
+    cursor: default;
 }

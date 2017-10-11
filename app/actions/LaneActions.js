@@ -5,6 +5,7 @@ export default Alt.generateActions(
     'update', 
     'delete', 
     'attachToLane', 
-    'detachFromLane', 
-    'move'
+    'detachFromLane',
+    'moveLane',
+    'moveNote'
 );

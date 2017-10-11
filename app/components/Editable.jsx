@@ -33,11 +33,11 @@ class Editable extends React.Component{
     }
 
     renderValue(){
-        const onDelete = this.props.onDelete;
+        const {onDelete, valueClass, ...props}  = this.props;
 
         return (
             <div onClick={this.props.onValueClick}>
-                <span className="value">
+                <span className={valueClass}>
                     {this.props.value}
                 </span>
                 {onDelete ? this.renderDelete(): null}
