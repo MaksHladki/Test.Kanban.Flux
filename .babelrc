@@ -4,6 +4,8 @@
         "react"
     ],
     "plugins": [
+        ["array-includes"],
+        ["transform-object-assign"],
         ["transform-decorators-legacy"],
         ["transform-object-rest-spread"]
     ]

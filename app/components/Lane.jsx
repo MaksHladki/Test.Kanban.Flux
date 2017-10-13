@@ -16,7 +16,7 @@ import Helper from '../lib/helper';
 
 const dragSource = {
     canDrag(props) {
-        return props.lane && props.lane.editing == false;
+        return props.lane && !props.lane.editing;
     },
     beginDrag(props) {
         return {

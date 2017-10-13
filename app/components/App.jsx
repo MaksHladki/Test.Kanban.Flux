@@ -6,8 +6,8 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import Autobind from 'autobind-decorator';
 import AltContainer from 'alt-container';
 
+import NavMenu from './NavMenu.jsx';
 import LaneList from './LaneList.jsx';
-import LaneActions from '../actions/LaneActions';
 import LaneStore from '../stores/LaneStore';
 
 @DragDropContext(HTML5Backend)
@@ -15,14 +15,11 @@ import LaneStore from '../stores/LaneStore';
 class App extends React.Component{
     constructor(props){
         super(props);
-        this.state = { width: 0, height: 0};
         this.menuElement = null;
-    }
-
-    addLane(){
-       LaneActions.create({
-           name: 'New Lane'
-       });
+        this.state = { 
+            contentWidth: 0, 
+            contentHeight: 0
+        };
     }
 
     componentDidMount() {
@@ -40,28 +37,20 @@ class App extends React.Component{
         const menuHeight = this.menuElement.getBoundingClientRect().height;
         this.setState(
             {
-                width: window.innerWidth,
-                height: window.innerHeight - menuHeight
+                contentWidth: window.innerWidth,
+                contentHeight: window.innerHeight - menuHeight
             }
         );
     }
 
     render(){
-        const {width, height} = this.state;
+        const {contentHeight} = this.state;
 
         return (
             <div className="page-container">
-                <div className="menu" ref="menu">
-                    <div className="menu__row">
-                        <ul className="menu__list">
-                            <li className="menu__col">
-                                <a className="menu__link" onClick={this.addLane}>Add Lane</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                <NavMenu ref="menu" />
                 <AltContainer stores={[LaneStore]} inject={{ lanes: () => LaneStore.getState().lanes || [] }}>
-                    <LaneList maxHeight={height} />
+                    <LaneList maxHeight={contentHeight} />
                 </AltContainer>
             </div>
         );
