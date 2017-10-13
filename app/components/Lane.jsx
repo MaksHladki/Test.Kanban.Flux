@@ -15,12 +15,15 @@ import ItemType from '../constants/itemType';
 import Helper from '../lib/helper';
 
 const dragSource = {
-  beginDrag(props) {
-    return {
-      id: props.lane.id,
-      index: props.index,
-    };
-  },
+    canDrag(props) {
+        return props.lane && props.lane.editing == false;
+    },
+    beginDrag(props) {
+        return {
+            id: props.lane.id,
+            index: props.index
+        };
+    },
 };
 
 const dragTarget = {
@@ -107,6 +110,7 @@ class Lane extends React.Component {
 
         if (!name || !name.trim()) {
             LaneActions.update({ id: laneId, editing: false });
+            return;
         }
 
         LaneActions.update({ id: laneId, name, editing: false });
@@ -119,9 +123,11 @@ class Lane extends React.Component {
     }
 
     activateLaneEdit() {
-        const laneId = this.props.lane.id;
+        const lane = this.props.lane;
 
-        LaneActions.update({ id: laneId, editing: true });
+        if(!lane.editing){
+            LaneActions.update({ id: lane.id, editing: true });
+        }
     }
 
     activateNoteEdit(id) {
