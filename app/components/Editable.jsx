@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import Textarea from 'react-textarea-autosize';
 import FontAwesome from 'react-fontawesome';
 import Autobind from 'autobind-decorator';
 
@@ -9,7 +11,7 @@ class Editable extends React.Component{
     }
 
     render(){
-        const {value, editing, onEdit, onValueClick, ...props} = this.props;
+        const {editing, ...props} = this.props;
 
         return (
             <div {...props}>
@@ -19,11 +21,26 @@ class Editable extends React.Component{
     }
 
     renderEdit(){
-        const {value, editClass, ...props} = this.props;
+        const {value, editClass, isEditInTextArea, ...props} = this.props;
+
+        if(isEditInTextArea){
+            return (
+                <Textarea
+                    ref={(e) => e ? e.selectionStart = value.length : null}
+                    className={editClass}
+                    autoFocus={true}
+                    defaultValue={value}
+                    onBlur={this.finishEdit}
+                    onKeyPress={this.checkEnter}>
+                </Textarea>
+            );
+        }
+
         return (
-            <input type="text" 
+            <input 
+                type="text"
+                ref={(e) => e ? e.selectionStart = value.length: null}
                 className={editClass}
-                ref={(e) => e ? e.selectionStart = this.props.value.length: null}
                 autoFocus={true}
                 defaultValue={value}
                 onBlur={this.finishEdit}
@@ -33,12 +50,12 @@ class Editable extends React.Component{
     }
 
     renderValue(){
-        const {onDelete, valueClass, ...props}  = this.props;
-
+        const {value, valueClass, editClass, onValueClick, onDelete, ...props}  = this.props;
+        
         return (
-            <div onClick={this.props.onValueClick}>
+            <div onClick={onValueClick}>
                 <span className={valueClass}>
-                    {this.props.value}
+                    {value}
                 </span>
                 {onDelete ? this.renderDelete(): null}
             </div>
@@ -46,8 +63,10 @@ class Editable extends React.Component{
     }
 
     renderDelete(){
+        const {onDelete, ...props} = this.props;
+
         return (
-            <a className="delete" onClick={this.props.onDelete}>
+            <a className="delete" onClick={onDelete}>
                  <FontAwesome name="close"/>
             </a>
         );

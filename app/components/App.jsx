@@ -15,6 +15,7 @@ import LaneStore from '../stores/LaneStore';
 class App extends React.Component{
     constructor(props){
         super(props);
+        
         this.menuElement = null;
         this.state = { 
             contentWidth: 0, 

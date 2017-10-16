@@ -21,9 +21,10 @@ class NoteList extends React.Component{
                         <Editable
                             value={note.task}
                             valueClass="note__text"
-                            editing={note.editing}
-                            editClass="note--edit"
                             onValueClick={this.props.onValueClick.bind(null, note.id)}
+                            editing={note.editing}
+                            isEditInTextArea={true}
+                            editClass="note--edit"
                             onEdit={this.props.onEdit.bind(null, note.id)}
                             onDelete={this.props.onDelete.bind(null, note.id)} />
                     </Note>

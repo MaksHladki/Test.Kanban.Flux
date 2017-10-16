@@ -150,12 +150,14 @@ class Lane extends React.Component {
                     <a className="button lane-button__btn-add" onClick={this.addNote}>
                         <FontAwesome name="plus"/>
                     </a>
-                    <Editable className="lane-header__name"
+                    <Editable 
+                        className="lane-header__name"
                         value={lane.name}
                         valueClass="lane-header__name__text"
+                        onValueClick={this.activateLaneEdit}
                         editing={lane.editing}
+                        isEditInTextArea={false}
                         editClass="lane-header__name--edit"
-                        onClick={this.activateLaneEdit}
                         onEdit={this.editName} />
                 </div>
                 <div className="lane__body" ref="laneBody">
