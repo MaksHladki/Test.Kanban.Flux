@@ -1,5 +1,6 @@
 import React from 'react';
 import Autobind from 'autobind-decorator';
+import PropTypes from 'prop-types';
 
 import Note from './Note.jsx';
 import Editable from './Editable.jsx';
@@ -12,7 +13,7 @@ class NoteList extends React.Component{
     }
 
     render(){
-        let notes = this.props.notes || [];
+        const notes = this.props.notes;
 
         return (
             <ul className="note-list">
@@ -32,6 +33,14 @@ class NoteList extends React.Component{
             </ul>
         );
     }
-}
+};
+
+NoteList.propTypes = {
+    notes: PropTypes.array
+};
+
+NoteList.defaultProps = {
+    notes: []
+};
 
 export default NoteList;

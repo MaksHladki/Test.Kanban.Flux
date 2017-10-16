@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Textarea from 'react-textarea-autosize';
 import FontAwesome from 'react-fontawesome';
 import Autobind from 'autobind-decorator';
+import PropTypes from 'prop-types';
 
 @Autobind
 class Editable extends React.Component{
@@ -12,7 +13,7 @@ class Editable extends React.Component{
 
     render(){
         const {editing, ...props} = this.props;
-
+        
         return (
             <div {...props}>
                 {editing ? this.renderEdit(): this.renderValue()}
@@ -86,5 +87,21 @@ class Editable extends React.Component{
         }
     }
 }
+
+Editable.PropTypes = {
+    value: PropTypes.string,
+    valueClass: PropTypes.string,
+    onValueClick: PropTypes.func,
+    editing: PropTypes.bool,
+    isEditInTextArea: PropTypes.bool,
+    editClass: PropTypes.string,
+    onEdit: PropTypes.func
+};
+
+Editable.defaultProps ={
+    value: '',
+    editing: false,
+    isEditInTextArea: false
+};
 
 export default Editable;

@@ -1,6 +1,7 @@
 import React from 'react';
 import {DragSource, DropTarget} from 'react-dnd';
 import Autobind from 'autobind-decorator';
+import PropTypes from 'prop-types';
 
 import ItemType from '../constants/itemType';
 
@@ -18,7 +19,7 @@ const noteTarget = {
         const sourceProps = monitor.getItem();
         const sourceId = sourceProps.id;
 
-        if(sourceId !== targetId){
+        if(sourceId !== targetId && targetProps.onMove){
             targetProps.onMove({sourceId, targetId});
         }
     }
@@ -40,11 +41,21 @@ class Note extends React.Component {
         const style = {
             opacity: isDragging || isOver ? 0 : 1
         };
-
+        
         return dragSource(connectDropTarget(
             <li style={style} {...props}>{props.children}</li>
         ));
     }
-}
+};
+
+Note.propTypes = {
+    id: PropTypes.string.isRequired,
+    editing: PropTypes.bool,
+    onMove: PropTypes.func
+};
+
+Note.defaultProps = {
+    editing: false
+};
 
 export default Note;

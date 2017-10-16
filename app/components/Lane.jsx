@@ -5,6 +5,7 @@ import {DragSource, DropTarget} from 'react-dnd';
 import { Scrollbars } from 'react-custom-scrollbars';
 import AltContainer from 'alt-container';
 import Autobind from 'autobind-decorator';
+import PropTypes from 'prop-types';
 
 import LaneActions from '../actions/LaneActions';
 import Editable from './Editable.jsx';
@@ -44,7 +45,9 @@ function dragTargetLane(props, monitor, component){
       return;
     }
 
-    props.onMove(dragIndex, hoverIndex);
+    if(props.onMove){
+        props.onMove(dragIndex, hoverIndex);
+    }
 
     monitor.getItem().index = hoverIndex;
 }
@@ -143,9 +146,9 @@ class Lane extends React.Component {
         const scrollHeight = this.laneBody != null
             ? Helper.calculateScrollHeight(this.laneBody.parentNode, this.laneBody, this.props.maxHeight, 6)
             : 0;
-       
+
         return connectDragSource(connectDropTarget(
-            <div style={style} {...props}>
+            <div className="lane" style={style}>
                 <div className="lane__header">
                     <a className="button lane-button__btn-add" onClick={this.addNote}>
                         <FontAwesome name="plus"/>
@@ -156,7 +159,6 @@ class Lane extends React.Component {
                         valueClass="lane-header__name__text"
                         onValueClick={this.activateLaneEdit}
                         editing={lane.editing}
-                        isEditInTextArea={false}
                         editClass="lane-header__name--edit"
                         onEdit={this.editName} />
                 </div>
@@ -178,6 +180,17 @@ class Lane extends React.Component {
             </div>
         ));
     }
-}
+};
+
+Lane.propTypes = {
+    lane: PropTypes.object.isRequired,
+    index: PropTypes.number.isRequired,
+    maxHeight: PropTypes.number,
+    onMove: PropTypes.func
+};
+
+Lane.defaultProps = {
+    maxHeight: 0
+};
 
 export default Lane;

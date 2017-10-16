@@ -50,7 +50,7 @@ class App extends React.Component{
         return (
             <div className="page-container">
                 <NavMenu ref="menu" />
-                <AltContainer stores={[LaneStore]} inject={{ lanes: () => LaneStore.getState().lanes || [] }}>
+                <AltContainer stores={[LaneStore]} inject={{ lanes: () => LaneStore.getState().lanes}}>
                     <LaneList maxHeight={contentHeight} />
                 </AltContainer>
             </div>

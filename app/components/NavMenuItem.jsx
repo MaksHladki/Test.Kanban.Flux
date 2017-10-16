@@ -1,5 +1,6 @@
 import React from 'react';
 import Autobind from 'autobind-decorator';
+import PropTypes from 'prop-types';
 
 @Autobind
 class NavMenuItem extends React.Component{
@@ -12,6 +13,11 @@ class NavMenuItem extends React.Component{
             </li>
         );
     }
-}
+};
+
+NavMenuItem.propTypes = {
+    action: PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired
+};
 
 export default NavMenuItem;
