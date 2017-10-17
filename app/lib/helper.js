@@ -33,12 +33,13 @@ export default {
         let hasChildNode = false;
 
         const parentNodeBoundingRectExt = this.getBoundingClientRectExt(parentNode);
-        height = height
-            - parentNodeBoundingRectExt.padding.top
-            - parentNodeBoundingRectExt.padding.bottom
-            - parentNodeBoundingRectExt.margin.top
-            - parentNodeBoundingRectExt.margin.bottom
-            - scrollWidth;
+        height -= (
+            parentNodeBoundingRectExt.padding.top +
+            parentNodeBoundingRectExt.padding.bottom +
+            parentNodeBoundingRectExt.margin.top +
+            parentNodeBoundingRectExt.margin.bottom +
+            scrollWidth
+        );
 
         if (!parentNode.hasChildNodes() || parentNode.isEqualNode(node)) {
             return height < 0 ? defaultHeight : height;
@@ -46,9 +47,7 @@ export default {
 
         parentNode.childNodes.forEach(function (element) {
             const elementBoundingRectExt = this.getBoundingClientRectExt(element);
-            height = height
-                - elementBoundingRectExt.margin.top
-                - elementBoundingRectExt.margin.bottom;
+            height -= (elementBoundingRectExt.margin.top + elementBoundingRectExt.margin.bottom);
 
             if(element.contains(node)){
                 hasChildNode = true;
@@ -59,9 +58,9 @@ export default {
         }, this);
 
         if (!hasChildNode || height < 0) {
-            return defaultHeight
+            return defaultHeight;
         }
 
         return height;
     }
-}
+};

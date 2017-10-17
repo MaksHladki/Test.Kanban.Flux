@@ -2,7 +2,6 @@ import uuid from 'node-uuid';
 import update from 'react-addons-update';
 import alt from '../lib/alt';
 
-import NoteStore from './NoteStore';
 import LaneActions from '../actions/LaneActions';
 
 class LaneStore{
@@ -63,6 +62,7 @@ class LaneStore{
             if(lane.id === laneId){
                 let notes = lane.notes;
                 notes = notes.filter(note => note.id !== noteId);
+                lane.notes = notes;
             }
 
             return lane;
